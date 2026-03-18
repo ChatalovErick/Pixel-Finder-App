@@ -5,6 +5,12 @@
 ## Precision Image & PDF Coordinate Extractor
 PixelPicker is a lightweight Streamlit web application designed to help users identify the exact width (X) and height (Y) of pixels within any image or PDF document. Whether you are mapping coordinates for automation, data science, or design, PixelPicker provides sub-pixel precision with an easy-to-use "one point at a time" workflow.
 
+## ⚠️ Disclaimer
+This tool measures raw pixel distances.
+X (Width): Distance from the left edge.
+Y (Height): Distance from the top edge.
+Values are based on the image resolution and do not represent real-world units (cm/inches) unless converted manually using the file's DPI.
+
 ## ✨ Key Features
 - **PDF & Image Support:** Seamlessly convert PDF pages to high-resolution PNGs for mapping.
 - **Precision Zoom & Pan:** Use magnification sliders to find the exact pixel you need.
@@ -35,8 +41,8 @@ streamlit run app.py
 
 Export: Once finished, close the window and download your results from the bottom of the main page.
 
-## ⚠️ Disclaimer
-This tool measures raw pixel distances.
-X (Width): Distance from the left edge.
-Y (Height): Distance from the top edge.
-Values are based on the image resolution and do not represent real-world units (cm/inches) unless converted manually using the file's DPI.
+## 📦 Bundled Dependency: Poppler
+To simplify the setup process, this project includes a pre-compiled version of Poppler (v25.12.0).
+
+Why is this here?
+The pdf2image library requires Poppler to "render" PDF pages into high-resolution images that the browser can display. By including it in the project folder, the app is portable and does not require you to manually edit your System Environment Variables (PATH).
