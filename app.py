@@ -5,6 +5,7 @@ from pdf2image import convert_from_bytes
 import io
 import pandas as pd
 import json
+import os
 
 # --- 1. PAGE CONFIG ---
 st.set_page_config(page_title="Pixel Finder", layout="wide")
@@ -29,7 +30,8 @@ if "last_added" not in st.session_state:
 def show_app_info():
 
     # Using a warning box for the disclaimer to make it stand out
-    st.warning("⚠️ **Disclaimer**\n\n**This app is designed to find the width (X) and height (Y) of specific pixels. Mainly for large images.**")
+    st.warning("⚠️ **Disclaimer**\n\n**This app is designed to find the width (X) and height (Y) of specific pixels, and it is used for images that needs better resolution"
+    " for large images.**")
 
     with st.expander("ℹ️ How to Use", expanded=False):
         st.markdown("""
@@ -145,18 +147,43 @@ current_image = None
 
 if uploaded_pdf:
     st.subheader("PDF Processing")
-    poppler_path = "poppler-25.12.0/Library/bin"
-    pages = convert_from_bytes(uploaded_pdf.read(), dpi=300, poppler_path=str(poppler_path))
-    current_image = pages[0]
+    
+    # 1. Store bytes so we don't lose them
+    pdf_data = uploaded_pdf.read()
+    
+    # 2. Dynamic Poppler Path
+    # We only use the manual path if we are on Windows (local dev)
+    # On Streamlit Cloud, Poppler is installed via packages.txt and doesn't need a path.
+    path_to_poppler = "poppler-25.12.0/Library/bin"
+    
+    try:
+        # If the local folder doesn't exist, we assume we are on the Cloud/Linux
+        if not os.path.exists(path_to_poppler):
+            pages = convert_from_bytes(pdf_data, dpi=300)
+        else:
+            pages = convert_from_bytes(pdf_data, dpi=300, poppler_path=path_to_poppler)
+        
+        if pages:
+            current_image = pages[0]
+            st.image(current_image, caption="PDF Page 1 Preview", use_container_width=True)
 
-    st.image(current_image, caption="PDF Page 1 Preview", use_container_width=True)
+            # 3. Use a context manager for the Buffer (Best practice for memory)
+            buf = io.BytesIO()
+            current_image.save(buf, format="PNG")
+            
+            st.download_button(
+                label="Download PNG", 
+                data=buf.getvalue(), 
+                file_name="converted.png", 
+                mime="image/png"
+            )
 
-    buf = io.BytesIO()
-    current_image.save(buf, format="PNG")
-    st.download_button("Download PNG", buf.getvalue(), "converted.png", "image/png")
-
-    if st.button("Start Annotation"):
-        open_image_window(current_image)
+            if st.button("Start Annotation"):
+                open_image_window(current_image)
+                
+    except Exception as e:
+        st.error(f"Failed to convert PDF: {e}")
+        st.info("Tip: If you're on the Cloud, ensure 'poppler-utils' is in your packages.txt file.")
 
 elif uploaded_img:
     current_image = Image.open(uploaded_img)
