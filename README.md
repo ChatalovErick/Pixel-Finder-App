@@ -1,7 +1,8 @@
-# Pixel-Finder-App
+# 📍  Pixel Finder App
+![Python 3.11](https://img.shields.io/badge/python_3.11-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Streamlit](https://img.shields.io/badge/streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 
-## 📍 PixelPicker
-### Precision Image & PDF Coordinate Extractor
+## Precision Image & PDF Coordinate Extractor
 PixelPicker is a lightweight Streamlit web application designed to help users identify the exact width (X) and height (Y) of pixels within any image or PDF document. Whether you are mapping coordinates for automation, data science, or design, PixelPicker provides sub-pixel precision with an easy-to-use "one point at a time" workflow.
 
 ## ✨ Key Features
