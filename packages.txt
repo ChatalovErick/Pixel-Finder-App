@@ -1,5 +1,1 @@
-streamlit==1.55.0
-streamlit-drawable-canvas-fix==0.9.8
-Pillow==10.4.0
-pdf2image==1.17.0
 poppler-utils
