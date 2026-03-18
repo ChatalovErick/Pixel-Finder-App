@@ -137,11 +137,6 @@ with st.sidebar:
     st.divider()
     uploaded_img = st.file_uploader("Upload Image", type=["png", "jpg", "jpeg"])
 
-    if st.button("Clear All Points"):
-        st.session_state.all_coords = []
-        st.session_state.last_added = None
-        st.rerun()
-
 # --- PDF HANDLING ---
 current_image = None
 
@@ -173,9 +168,6 @@ if uploaded_pdf:
                 file_name="converted.png", 
                 mime="image/png"
             )
-
-            if st.button("Start Annotation"):
-                open_image_window(current_image)
                 
     except Exception as e:
         st.error(f"Failed to convert PDF: {e}")
