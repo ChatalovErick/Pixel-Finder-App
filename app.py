@@ -154,14 +154,10 @@ if uploaded_pdf:
     # 2. Dynamic Poppler Path
     # We only use the manual path if we are on Windows (local dev)
     # On Streamlit Cloud, Poppler is installed via packages.txt and doesn't need a path.
-    path_to_poppler = "poppler-25.12.0/Library/bin"
     
     try:
         # If the local folder doesn't exist, we assume we are on the Cloud/Linux
-        if not os.path.exists(path_to_poppler):
-            pages = convert_from_bytes(pdf_data, dpi=300)
-        else:
-            pages = convert_from_bytes(pdf_data, dpi=300, poppler_path=path_to_poppler)
+        pages = convert_from_bytes(pdf_data, dpi=300)
         
         if pages:
             current_image = pages[0]
@@ -183,7 +179,7 @@ if uploaded_pdf:
                 
     except Exception as e:
         st.error(f"Failed to convert PDF: {e}")
-        st.info("Tip: If you're on the Cloud, ensure 'poppler-utils' is in your packages.txt file.")
+
 
 elif uploaded_img:
     current_image = Image.open(uploaded_img)
