@@ -20,8 +20,8 @@ You will need Python 3.8+ and poppler (for PDF processing).
 Clone the repository:
 
 ```Bash 
-git clone https://github.com/your-username/pixel-picker.git
-cd pixel-picker
+git clone https://github.com/ChatalovErick/Pixel-Finder-App.git
+cd Pixel-Finder-App
 pip install -r requirements.txt
 streamlit run app.py
 ```
