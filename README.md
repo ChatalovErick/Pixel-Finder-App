@@ -4,6 +4,7 @@
 
 ## streamlit link:
 [pixel-finder-app.streamlit.app](https://pixel-finder-app.streamlit.app/)
+Better to install and run locally, some images are to heavy to use inside the Streamlit Community Cloud.
 
 ## Precision Image & PDF Coordinate Extractor
 PixelPicker is a lightweight Streamlit web application designed to help users identify the exact width (X) and height (Y) of pixels within any image or PDF document. Whether you are mapping coordinates for automation, data science, or design, PixelPicker provides sub-pixel precision with an easy-to-use "one point at a time" workflow.
@@ -12,7 +13,7 @@ PixelPicker is a lightweight Streamlit web application designed to help users id
 This tool measures raw pixel distances.
 X (Width): Distance from the left edge.
 Y (Height): Distance from the top edge.
-Values are based on the image resolution and do not represent real-world units (cm/inches) unless converted manually using the file's DPI.
+Values are based on the image resolution and do not represent real-world units (cm/inches) unless converted manually using the file's DPI. 
 
 ## ✨ Key Features
 - **PDF & Image Support:** Seamlessly convert PDF pages to high-resolution PNGs for mapping.
