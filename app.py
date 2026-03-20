@@ -133,7 +133,7 @@ show_app_info()
 
 with st.sidebar:
     st.header("Upload")
-    uploaded_pdf = st.file_uploader("Upload PDF", type=["pdf"])
+    uploaded_pdf = st.file_uploader("Upload PDF (transform to png with 300 dpi)", type=["pdf"])
     st.divider()
     uploaded_img = st.file_uploader("Upload Image", type=["png", "jpg", "jpeg"])
 
